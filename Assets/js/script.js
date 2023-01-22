@@ -8,21 +8,37 @@
 //         var timeHour = parseInt($(this).attr("id").split("hour")[1]);
 
 //         if (timeHour < timeNow) {
-//             $(this).addClass("pasthour");
+//             $(this).addClass("past");
 //         }
 //         else if (timeHour === timeNow) {
-//             $(this).addClass("presenthour");
+//             $(this).addClass("present");
 //         }
 //         else if (timeHour > timeNow) {
-//             $(this).addClass("futurehour");
+//             $(this).addClass("future");
 //         }
 //     })
+
 // }
 
-// $(document).ready(function () {
-//     $(".saveBtn").on("click", function () {
-//     })
+function whatTime() {
+    var timeNow = moment().hour();
 
-//     whatTime();
-// })
+    $(".time-block").each(function () {
+        var timeHour = parseInt($(this).find('.hour').text().split(':')[0]);
+        if (timeHour < timeNow) {
+            className = "past";
+        }
+        else if (timeHour === timeNow) {
+            className = "present";
+        }
+        else if (timeHour > timeNow) {
+            className = "future";
+        }
+        $(this).removeClass("past present future").addClass(className);
+    });
+}
+
+$(document).ready(function () {
+    whatTime();
+})
 
